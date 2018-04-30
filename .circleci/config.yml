@@ -26,7 +26,8 @@ jobs:
 
       # Download and cache dependencies
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum
+"app/build.gradle" }}
 
       
       - run:
@@ -36,14 +37,16 @@ jobs:
       - run:
           name: Decrypt release key
           command: openssl aes-256-cbc -d -in
-          distribution/release.keystore-cipher -out
-          distribution/release.keystore -md sha256 -k $CIPHER_DECRYPT_KEY
+distribution/release.keystore-cipher -out
+distribution/release.keystore -md sha256 -k $CIPHER_DECRYPT_KEY
           
       - run:
           name: Build
-          command: ./gradlew clean check assemble assembleAndroidTest
+          command: ./gradlew clean check assemble
+assembleAndroidTest
 
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum 
+"app/build.gradle" }}

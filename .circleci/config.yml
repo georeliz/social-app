@@ -37,7 +37,7 @@ jobs:
           name: Decrypt release key
           command: openssl aes-256-cbc -d -in
           distribution/release.keystore-cipher -out
-          distribution/release.keystore -md -sha256 -k $CIPHER_DECRYPT_KEY
+          distribution/release.keystore -md sha256 -k $CIPHER_DECRYPT_KEY
           
       - run:
           name: Build
